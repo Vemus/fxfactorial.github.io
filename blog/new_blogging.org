@@ -13,3 +13,5 @@ Blogging is usually a pleasurable experience, it's a good way to know
 whether you know whatever it is you actually claim to know. Previously
 I was using [[http://octopress.org/][octopress]] paired with [[http://orgmode.org/][org-mode]] and it was fairly
 decent although the emacs configuration was painful at times.
+
+The real problem was building the site and deploying.
