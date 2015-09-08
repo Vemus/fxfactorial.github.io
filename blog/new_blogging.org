@@ -14,6 +14,6 @@ whether you know whatever it is you actually claim to know. Previously
 I was using [[http://octopress.org/][octopress]] paired with [[http://orgmode.org/][org-mode]] and it was fairly
 decent although the emacs configuration was painful at times.
 
-The real problem was building the site and deploying. Since
-~octopress~ is built on top of [[http://jekyllrb.com/][Jekyll]] it is then a ~Ruby~ application.
-
+The real problem was building the site and deploying. Octopress is a
+Ruby application since octopress is built on top of [[http://jekyllrb.com/][Jekyll]] and that's
+a Ruby program. 
