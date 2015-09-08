@@ -1,5 +1,13 @@
 #+TITLE: Здравствуйте
 #+OPTIONS: H:3 num:nil toc:nil \n:nil ::t |:t ^:nil -:nil f:t *:t <:t
 
-I like to blog about [[https://www.gnu.org/software/emacs/][emacs]], [[https://ocaml.org/][OCaml]] and anything else that happens to
-come to mind.
+I'm a computer programmer in San Francisco, CA with a preference for
+functional programming, I'm lucky enough that I write OCaml everyday.
+
+* Open Source Projects
+These are all up on github and licensed with BSD-3.
+1) OCaml bindings to maxminddb
+2) OCaml other bindings.
+
+
+[[./static/img/blog_me.jpg]]
