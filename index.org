@@ -1,9 +1,10 @@
-#+TITLE: Здравствуйте
+#+TITLE: Здравствуйте (Hello)
+#+OPTIONS: toc:nil
 
 #+ATTR_HTML: style="float left"
 [[./static/img/blog_me.jpg]]
 #+begin_html
-<br/>
+<br/></br/>
 #+end_html
 
 I'm a computer programmer in San Francisco, CA with a preference for
