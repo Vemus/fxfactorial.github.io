@@ -1,4 +1,4 @@
-#+OPTIONS: H:3 num:nil toc:nil \n:nil ::t |:t ^:nil -:nil f:t *:t <:t
+#+OPTIONS: H:3 num:nil toc:nil \n:nil ::t |:t ^:nil -:nil f:t *:t <:t title:nil
 
 I'm a 25 year old computer programmer in San Francisco. My
 undergraduate was in Philosophy but I found coding to be much more
