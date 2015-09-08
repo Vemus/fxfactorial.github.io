@@ -1,7 +1,11 @@
 #+TITLE: Здравствуйте
 #+OPTIONS: H:3 num:nil toc:nil \n:nil ::t |:t ^:nil -:nil f:t *:t <:t
 
+#+ATTR_HTML: style="float left"
 [[./static/img/blog_me.jpg]]
+#+begin_html
+<br/>
+#+end_html
 
 I'm a computer programmer in San Francisco, CA with a preference for
 functional programming, specifically [[https://ocaml.org/][OCaml]]. My undergraduate is in
