@@ -2,8 +2,11 @@
 #+OPTIONS: H:3 num:nil toc:nil \n:nil ::t |:t ^:nil -:nil f:t *:t <:t
 
 [[./static/img/blog_me.jpg]]
+
 I'm a computer programmer in San Francisco, CA with a preference for
-functional programming, I'm lucky enough that I write OCaml everyday.
+functional programming, specifically [[https://ocaml.org/][OCaml]]. My undergraduate is in
+Philosophy and I did some graduate computer science coursework in New
+York City.
 
 * Open Source Projects Worth Mentioning
 These are all up on github and licensed with BSD-3.
