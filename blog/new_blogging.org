@@ -1,0 +1,15 @@
+#+TITLE:       Simpler Blogging
+#+AUTHOR:      Edgar Aroutiounian
+#+EMAIL:       edgar.factorial@gmail.com
+#+DATE:        2015-09-07 Mon
+#+URI:         /blog/%y/%m/%d/simpler-blogging
+#+KEYWORDS:    blogging, octopress, emacs, org-mode
+#+TAGS:        emacs, org-mode
+#+LANGUAGE:    en
+#+OPTIONS:     H:3 num:nil toc:nil \n:nil ::t |:t ^:nil -:nil f:t *:t <:t
+#+DESCRIPTION: Leaving Octopress, embracing org-mode
+
+Blogging is usually a pleasurable experience, it's a good way to know
+whether you know whatever it is you actually claim to know. Previously
+I was using [[http://octopress.org/][octopress]] paired with [[http://orgmode.org/][org-mode]] and it was fairly
+decent.

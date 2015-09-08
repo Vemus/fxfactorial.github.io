@@ -1,3 +1,4 @@
-#+TITLE: Index
+#+TITLE: Splash
 
-This is the home page of Edgar Aroutiounian.
+I like to blog about [[https://www.gnu.org/software/emacs/][emacs]], [[https://ocaml.org/][OCaml]] and anything else that happens to
+come to mind.
