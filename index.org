@@ -1,12 +1,7 @@
 #+TITLE: Здравствуйте (Hello)
 #+OPTIONS: toc:nil
-
-#+ATTR_HTML: style="float left"
+# Need to make this float left and add a break line
 [[./static/img/blog_me.jpg]]
-#+begin_html
-<br/></br/>
-#+end_html
-
 I'm a computer programmer in San Francisco, CA with a preference for
 functional programming, specifically [[https://ocaml.org/][OCaml]]. My undergraduate is in
 Philosophy and I did some graduate computer science coursework in New
