@@ -1,13 +1,13 @@
 #+TITLE: Здравствуйте
 #+OPTIONS: H:3 num:nil toc:nil \n:nil ::t |:t ^:nil -:nil f:t *:t <:t
 
+[[./static/img/blog_me.jpg]]
 I'm a computer programmer in San Francisco, CA with a preference for
 functional programming, I'm lucky enough that I write OCaml everyday.
 
-* Open Source Projects
+* Open Source Projects Worth Mentioning
 These are all up on github and licensed with BSD-3.
-1) OCaml bindings to maxminddb
-2) OCaml other bindings.
-
-
-[[./static/img/blog_me.jpg]]
+1) OCaml bindings library for [[https://www.maxmind.com/en/home][geoip2]], provides geolocation information
+   from a given IP address. Pretty stable.
+2) OCaml bindings library for [[https://www.libssh.org/][libssh]], provides implementation of the
+   ssh protocol. This is not stable, I need to work on it.
