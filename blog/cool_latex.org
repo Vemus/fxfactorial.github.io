@@ -109,10 +109,12 @@ converging. Naturally I did my paper in emacs. Here are the steps
 needed.
 1. Install the ~animate~ package using Tex Live Utility
 2. Add the following two lines to your ~.org~ file. 
+
    #+BEGIN_SRC org-mode
    #+LATEX_HEADER: \usepackage{animate}
    #+LATEX_HEADER: \usepackage{graphics}
    #+END_SRC
+
 3. For the place where you want to add the animation, add code like
    the following to your ~.org~ file:
 
