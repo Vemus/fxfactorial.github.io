@@ -16,4 +16,15 @@ decent although the emacs configuration was painful at times.
 
 The real problem was building the site and deploying. Octopress is a
 Ruby application since octopress is built on top of [[http://jekyllrb.com/][Jekyll]] and that's
-a Ruby program. 
+a Ruby program. I blindly and admittedly stupidly did:
+#+begin_src shell
+$ gem update
+#+end_src
+which of course broke my project. Add to that I fiddled with the
+Rakefile which utterly broke the project. Yes I could have fixed all
+the problems, eventually that is. But that would have taken much time
+and even worse I'd be learning how the sausage is made for a project
+that I don't really care about. Where's the abstraction then? I always
+like using technologies and languages that I already know, of
+course. So naturally I wanted an emacs based solution and emacs offers
+a great mode called org-mode. I looked at this 
