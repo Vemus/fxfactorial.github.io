@@ -1,4 +1,4 @@
-#+TITLE:       Setting up emacs for Linux Coding
+#+TITLE:       Emacs for Linux Coding Part I
 #+AUTHOR:      Edgar Aroutiounian
 #+EMAIL:       edgar.factorial@gmail.com
 #+DATE:        2015-09-11 Fri
@@ -9,7 +9,7 @@
 #+OPTIONS:     H:3 num:nil toc:nil \n:nil ::t |:t ^:nil -:nil f:t *:t <:t
 #+DESCRIPTION: Config emacs for kernel hacking
 
-*Note* This post initially appeared on my previous blog and I'm just
+*Note* This series initially appeared on my previous blog and I'm just
  porting it over to here with small stylistic changes. 
 
 This post will share some configurations I did to setup emacs for
@@ -102,5 +102,4 @@ VM and calls ~os-s~. You'll notice some commented out code, the first
 was some time wasted with tramp and the second was trying to use an
 alias in the remote shell, hint: it didn't work. 
 
-That's it for this post. I will write Part two later relating to gnu
-global/helm.
+That's it for this post. Part two will relate to gnu global/helm.
