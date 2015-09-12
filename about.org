@@ -5,4 +5,4 @@
 #+STARTUP: indent
 #+OPTIONS:  toc:nil num:0
 
-Everything already said on the homepage.
+Everything already said on the [[http://hyegar.com][homepage]].
