@@ -1,0 +1,27 @@
+#+TITLE:       Setting up emacs for Linux Coding
+#+AUTHOR:      Edgar Aroutiounian
+#+EMAIL:       edgar.factorial@gmail.com
+#+DATE:        2015-09-11 Fri
+#+URI:         /blog/%y/%m/%d/setting-up-emacs-for-linux-coding
+#+KEYWORDS:    linux, emacs, config, kernel
+#+TAGS:        linux, emacs, kernel, coding
+#+LANGUAGE:    en
+#+OPTIONS:     H:3 num:nil toc:nil \n:nil ::t |:t ^:nil -:nil f:t *:t <:t
+#+DESCRIPTION: Config emacs for kernel hacking
+
+*Note* This post initially appeared on my previous blog and I'm just
+ porting it over to here with small stylistic changes. 
+
+This post will share some configurations I did to setup emacs for
+linux kernel coding. Some minor context, the following emacs setup
+came as a result of my Operating Systems class fall 2014. Note, a lot
+of what I will go over is due to the great tutorials and walkthroughs
+made by the emacs community, especially by Tuhdo's [[http://tuhdo.github.io/c-ide.html][great post]].
+
+* The tools
+Since our homeworks were assigned on a Debian VM, the natural
+beginning tool was emacs+tramp. One thing early annoyance was tramp
+constantly asking for passwords, so I put this in my init.el
+#+BEGIN_SRC emacs-lisp
+(setq password-cache-expiry nil)
+#+END_SRC
