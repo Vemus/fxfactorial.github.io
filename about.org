@@ -1,0 +1,7 @@
+#+AUTHOR:   Edgar Aroutiounian
+#+EMAIL:    edgar.factorial@gmail.com
+#+LANGUAGE: en
+#+STARTUP: indent
+#+OPTIONS:  toc:nil num:0
+
+Everything already said on the homepage.
