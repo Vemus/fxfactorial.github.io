@@ -1,6 +1,6 @@
 #+AUTHOR:   Edgar Aroutiounian
 #+EMAIL:    edgar.factorial@gmail.com
-#+TITLE: ""
+#+TITLE: 
 #+LANGUAGE: en
 #+STARTUP: indent
 #+OPTIONS:  toc:nil num:0
