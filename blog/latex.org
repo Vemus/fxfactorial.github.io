@@ -45,12 +45,12 @@ HTML; its pretty neat and convenient.
 
 Okay, back to org-mode. In org-mode, you can put some configurations,
 things like:
-#+BEGIN_SRC 
+#+BEGIN_SRC org-mode
   #+BEGIN_SRC
   #+AUTHOR: Edgar
   #+LATEX_HEADER: \usepackage{lmodern}
   #+OPTIONS: toc:nil
-#+END_SRC
+  #+END_SRC
 #+END_SRC
 
 Writing those things out on each new ~.org~ file is
