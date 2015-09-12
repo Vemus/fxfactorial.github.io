@@ -1,9 +1,9 @@
-#+TITLE:       latex.org
+#+TITLE:       LaTeX, org-mode and animations
 #+AUTHOR:      Edgar Aroutiounian
 #+EMAIL:       edgar.factorial@gmail.com
 #+DATE:        2015-09-11 Fri
-#+URI:         <TODO: insert your uri here>
-#+KEYWORDS:    latex, emacs, org-mode
+#+URI:         /blog/%y/%m/%d/latex,-org-mode-and-animations
+#+KEYWORDS:    latex, org-mode
 #+TAGS:        latex, org-mode
 #+LANGUAGE:    en
 #+OPTIONS:     H:3 num:nil toc:nil \n:nil ::t |:t ^:nil -:nil f:t *:t <:t
