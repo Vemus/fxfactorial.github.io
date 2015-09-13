@@ -34,6 +34,38 @@ programming language. For me I'm working in the day-time as an OCamler
 and I use it for my personal projects. I even write JavaScript in
 OCaml via [[http://ocsigen.org/js_of_ocaml/][js_of_ocaml]].
 
+Here's an example straight from my bindings to libmaxminddb
+
+#+BEGIN_SRC ocaml
+(* File named loc_dump.ml *)
+#require "maxminddb"
+let () = 
+  let some_ip = "172.56.31.240" in
+  Maxminddb.with_mmdb "etc/GeoLite2-City.mmdb" begin fun this_mmdb ->
+    let loc = Maxminddb.location some_ip this_mmdb in
+    let open Maxminddb in
+    Printf.sprintf "%f %f %d %s" loc.latitude loc.longitude loc.metro_code loc.time_zone
+    |> print_endline;
+    let geo_borders = borders ~lang:French ~ip:some_ip this_mmdb in
+    Printf.sprintf
+      "%s %s %s %s %s"
+      geo_borders.postal_code
+      geo_borders.city_name
+      geo_borders.country_name
+      geo_borders.continent_name
+      geo_borders.iso_code
+  |> print_endline
+  end
+#+END_SRC 
+
+And the corresponding result on the shell
+
+#+BEGIN_SRC ocaml
+$ utop loc_dump.ml
+33.895900 -118.220100 803 America/Los_Angeles
+90221 Compton États-Unis Amérique du Nord US
+#+END_SRC
+
 In any case if you're a programmer and reading this post then I
 recommend that you try OCaml, especially if you have been burned by
 Haskell's mental overhead.
