@@ -60,7 +60,7 @@ let () =
 
 And the corresponding result on the shell
 
-#+BEGIN_SRC ocaml
+#+BEGIN_SRC shell
 $ utop loc_dump.ml
 33.895900 -118.220100 803 America/Los_Angeles
 90221 Compton États-Unis Amérique du Nord US
