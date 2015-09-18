@@ -53,9 +53,9 @@ third party that forcibly injected itself into the patient-doctor
 realm.
 
 * Something to be said
-My grew up in the Soviet Union so everything that he knew was
+My dad grew up in the Soviet Union so everything that he knew was
 ultimately state owned, both physically and intellectually. But he
-said the following to me, 
+said the following to me,
 
 #+BEGIN_QUOTE Dad
 Why is the government involved between me and the doctors, or the
