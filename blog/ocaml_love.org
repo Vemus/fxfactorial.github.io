@@ -31,10 +31,10 @@ clean and easy to reason about code.
 I keep getting this question and its a little strange. What can I do
 with this language? Well anything else you can do in any other
 programming language. For me I'm working in the day-time as an OCamler
-and I use it for my personal projects. I even write JavaScript in
+and I use it for my [[https://github.com/fxfactorial][personal projects]]. I even write JavaScript in
 OCaml via [[http://ocsigen.org/js_of_ocaml/][js_of_ocaml]].
 
-Here's an example straight from my bindings to libmaxminddb
+Here's an example straight from my bindings to [[https://github.com/maxmind/libmaxminddb][libmaxminddb]].
 
 #+BEGIN_SRC ocaml
 (* File named loc_dump.ml *)
@@ -69,4 +69,4 @@ $ utop loc_dump.ml
 
 In any case if you're a programmer and reading this post then I
 recommend that you try OCaml, especially if you have been burned by
-Haskell's mental overhead.
+Haskell's mental overhead but still want to do functional programming.
