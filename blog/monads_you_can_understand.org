@@ -179,6 +179,72 @@ returning a monad so we pass its output to ~>>=~, which passes a json
 object to a lambda, we turn the json value to a pretty printed string
 and pipe it out to ~Lwt_io.printl~, a ~printf~ for the ~Lwt~ library.
 
+* Build and Run
+Now let's build our program and run it, assuming all the code is in
+~code.ml~ we invoke the OCaml toolchain as so:
+#+BEGIN_SRC ocaml
+$ ocamlfind ocamlopt -linkpkg code.ml -packages lwt.unix,cohttp.lwt,yojson,uri -o T
+#+END_SRC
+assuming everything well, you should have an executable T, which will
+print something like:
+#+BEGIN_SRC ocaml
+$ ./T
+{
+  "object": "charge",
+  "created": 1443072037,
+  "livemode": false,
+  "paid": true,
+  "status": "succeeded",
+  "amount": 500,
+  "currency": "usd",
+  "refunded": false,
+  "source": {
+    "object": "card",
+    "brand": "Visa",
+    "funding": "credit",
+    "exp_month": 8,
+    "exp_year": 2016,
+    "country": "US",
+    "name": null,
+    "address_line1": null,
+    "address_line2": null,
+    "address_city": null,
+    "address_state": null,
+    "address_zip": null,
+    "address_country": null,
+    "cvc_check": null,
+    "address_line1_check": null,
+    "address_zip_check": null,
+    "tokenization_method": null,
+    "dynamic_last4": null,
+    "metadata": {},
+    "customer": null
+  },
+  "captured": true,
+  "failure_message": null,
+  "failure_code": null,
+  "amount_refunded": 0,
+  "customer": null,
+  "invoice": null,
+  "dispute": null,
+  "metadata": {},
+  "statement_descriptor": null,
+  "fraud_details": {},
+  "receipt_email": null,
+  "receipt_number": null,
+  "shipping": null,
+  "destination": null,
+  "application_fee": null,
+  "refunds": {
+    "object": "list",
+    "total_count": 0,
+    "has_more": false,
+    "url": "/v1/charges/ch_16oS9pJDURztdKY9Z7QS8c8D/refunds",
+    "data": []
+  }
+}
+#+END_SRC
+
 * Moral of the Story
 So in terms of actually day to day coding, you don't actually need to
 know what a monad "is", you just need to know how to use it and
