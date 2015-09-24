@@ -13,8 +13,11 @@ Let's learn about monads as programmers, that is let's use them for
 building something and in the process we'll build up a intuition;
 practice first, then we can come back to theory.
 
-(I'll be writing to an OCaml audience mainly, but the monad idea
-should be understandable anyway)
+This post is split in two parts: 
+Part 1 is just to get the ideas out the door
+
+Part 2 (Currently not written) is for an OCaml audience,
+just to improve the quality of the OCaml code itself
 
 As Bryan O'Sullivan said (From Real World Haskell) "...we need
 something that's non-trivial but still chewey." So we'll build a real
@@ -31,20 +34,20 @@ These are the libaries we will use: ~lwt~ is for threading,
 ~cohttp.lwt~ is for our HTTP requests, ~uri~ for handling URIs and
 ~yojson~, an easy to use and *de facto* json library.
 
-* TODO Stripe
+* Stripe
 The Stripe API is a straight forward REST API. You'll need to have a
 developer account from which you'll get your Test Key, hence forth
 known as ~key~. We'll focus on one task, we'll start the process of
 charging a credit card. Point your browser to this [[https://stripe.com/docs/api#create_charge][link]] which shows
-how to create the "Charge" object. From there we see we need to do a
+how to create the "Charge" object. Be sure to be looking at that page
+while logged because we'll need the value for the ~source~ parameter,
+we'll call it the *source token* From there we see we need to do a
 ~POST~ to https://api.stripe.com/v1/charges with several required
 arguments:
 
 1) The amount to charge
-2) The ISO code for currency (a perfect use-case for a variant, we'll
-   use polymorphic variants for this)
-3) Either the Customer or Source, (this will also use polymorphic
-   variants)
+2) The ISO code for currency 
+3) Either the Customer or Source
    
 All of Stripe's API returns JSON, so we can already sketch out our
 function's signature and helper data structure, something like:
@@ -153,9 +156,28 @@ monad. Remember our goal is to get the body as a json object, so we
 could just pipe it to ~Yojson.Basic.from_string~ but still recall that
 our ~create_charge~ function had final value of ~Yojson.Basic.json
 Lwt.t~, not a plain ~Yojson.Basic.json~ so we pipe it to the other
-famous monad related function, ~return~
+famous monad related function, ~return~. ~return~ really should have
+been called inject because it takes a plain value and "injects" it
+into a monad, let's see its value here:
+#+BEGIN_SRC ocaml
+val return : 'a -> 'a Lwt.t
+#+END_SRC
+We are using it to turn out plain ~json~ into a ~json Lwt.t~ Now let's
+use this code to actually do something.
+#+BEGIN_SRC ocaml
+let program = 
+  let this_handle = make_handle () in
+  let st = "SOURCE_TOKEN_MENTIONED_EARLIER" in
+  create_charge 500 "usd" this_handle >>= fun j -> 
+  Yojson.Basic.pretty_to_string j |> Lwt_io.printl 
 
-
+let () = 
+  Lwt_main.run program
+#+END_SRC
+At this point this should be understandable, our create_charge is
+returning a monad so we pass its output to ~>>=~, which passes a json
+object to a lambda, we turn the json value to a pretty printed string
+and pipe it out to ~Lwt_io.printl~, a ~printf~ for the ~Lwt~ library.
 
 * Moral of the Story
 So in terms of actually day to day coding, you don't actually need to
