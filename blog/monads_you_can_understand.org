@@ -79,7 +79,11 @@ let make_handle () =
 This creates our record needed for making a post. Stripe requires a
 key in each request, so we just make this record to encapsulate that
 other wise boilerplate code we'd have to do instead. Now the first cut
-of out ~create_charge~ function:
+of out ~create_charge~ function: 
+
+(*META NOTE* This is horrible indentation, I'm only doing it because
+of the sizing done in the exporting of this document and I want it to
+be clear what's happening)
 #+BEGIN_SRC ocaml -n
 let create_charge amount currency source handle = 
   let open Cohttp_lwt_unix in
@@ -88,9 +92,23 @@ let create_charge amount currency source handle =
    ("currency", currency);]
    ("source", source)]
   |> Uri.add_query_params' this_uri
-  |> Client.post ~headers:handle.authed >>= fun (resp, body) -> 
-  Cohttp_lwt_body.to_string body >|= 
-  Yojson.Basic.from_string
+  |> Client.post ~headers:handle.authed >>= 
+     fun (resp, body) -> 
+     Cohttp_lwt_body.to_string body >|= 
+     Yojson.Basic.from_string
 #+END_SRC
-Okay, so what the hell is going on.
+Okay, so what the hell is going on. Line 2 open the ~Cohttp_lwt_unix~
+module locally to this function so that we can type Client.post
+instead of ~Cohttp_lwt_unix.Client.post~. Line 3 creates a ~uri~
+object, lines 4-6 are the query parameters we want to add to our ~uri~
+object. The ~|>~ symbol is a function, you can call it reverse apply,
+you can define it as
+#+BEGIN_SRC ocaml 
+let ( |> ) f x = x f
+#+END_SRC
 
+
+* Moral of the Story
+So in terms of actually day to day coding, you don't actually need to
+know what a Monad "is", you just need to know how to use it and
+honestly that's completely fine.
