@@ -13,7 +13,7 @@ Let's learn about monads as programmers, that is let's use them for
 building something and in the process we'll build up a intuition;
 practice first, then we can come back to theory.
 
-(I'll be writing to an OCaml audience mainly, but the Monad idea
+(I'll be writing to an OCaml audience mainly, but the monad idea
 should be understandable anyway)
 
 As Bryan O'Sullivan said (From Real World Haskell) "...we need
@@ -62,7 +62,7 @@ val create_charge : int ->
 #+END_SRC
 Mostly straight forward, although that ~Lwt.t~ should look at
 little strange. The quick answer that that ~create_charge~ will give
-back an ~Lwt.t~ Monad which in this case will contain a ~json~ object.
+back an ~Lwt.t~ monad which in this case will contain a ~json~ object.
 
 Let's start filling out the ~make_handle~ function, 
 #+BEGIN_SRC ocaml
@@ -84,7 +84,7 @@ Now the first cut of out ~create_charge~ function:
 
 (*META NOTE* This is horrible indentation, I'm only doing it because
 of the sizing done in the exporting of this document and I want it to
-be clear what's happening and the coloring is wrong because ~'~ can be
+be clear what's happening and the coloring is wrong because ~ ' ~ can be
 used in a value's name but its messing up the coding exporter)
 #+BEGIN_SRC ocaml -n
 let create_charge amount currency source handle = 
@@ -121,9 +121,17 @@ val post ?ctx:Cohttp_lwt_unix.Client.ctx ->
 #+END_SRC
 Looks big but we don't care about most of it, in fact we could just
 care about the ~Uri.t~ parameter since the rest of the parameters, the
-ones with ~?~, have default values.
+ones with ~?~, have default values but we can override them as we do
+on line 8's ~Client.post ~headers:handle.authed~. Now notice the final
+value of a call to ~Client.post~, its:
+#+BEGIN_SRC ocaml
+(Cohttp.Response.t * Cohttp_lwt_body.t) Lwt.t
+#+END_SRC
+This says that ~post~ will give back an ~Lwt.t~ monad which contains a
+tuple of a response object and the body, again completely reasonable.
+The line of line 8 features the famous ~ >>= ~ operator, aka ~bind~
 
 * Moral of the Story
 So in terms of actually day to day coding, you don't actually need to
-know what a Monad "is", you just need to know how to use it and
+know what a monad "is", you just need to know how to use it and
 honestly that's completely fine.
