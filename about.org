@@ -5,4 +5,7 @@
 #+STARTUP: indent
 #+OPTIONS:  toc:nil num:0
 
-Everything already said on the [[http://hyegar.com][homepage]].
+Mostly already said on the [[http://hyegar.com][homepage]]
+
+[[http://twitter.com/edgararout][Twitter]]
+[[http://github.com/fxfactorial][GitHub]]
