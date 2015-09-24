@@ -41,7 +41,7 @@ developer account from which you'll get your Test Key, hence forth
 known as ~key~. We'll focus on one task, we'll start the process of
 charging a credit card. Point your browser to this [[https://stripe.com/docs/api#create_charge][link]] which shows
 how to create the "Charge" object. Be sure to be looking at that page
-while logged because we'll need the value for the ~source~ parameter,
+while logged in because we'll need the value for the ~source~ parameter,
 we'll call it the *source token* From there we see we need to do a
 ~POST~ to https://api.stripe.com/v1/charges with several required
 arguments:
@@ -163,8 +163,9 @@ into a monad, let's see its value here:
 #+BEGIN_SRC ocaml
 val return : 'a -> 'a Lwt.t
 #+END_SRC
-We are using it to turn out plain ~json~ into a ~json Lwt.t~ Now let's
-use this code to actually do something.
+We are using it to turn our plain ~Yojson.Basic.json~ into a
+~Yojson.Basic.json Lwt.t~ Now let's use this code to actually do
+something.
 #+BEGIN_SRC ocaml
 let program = 
   let this_handle = make_handle () in
