@@ -1,0 +1,70 @@
+#+TITLE:       Let's just use Monads
+#+AUTHOR:      Edgar Aroutiounian
+#+EMAIL:       edgar.factorial@gmail.com
+#+DATE:        2015-09-23 Wed
+#+URI:         /blog/%y/%m/%d/let's-just-use-monads
+#+KEYWORDS:    monads
+#+TAGS:        ocaml, functional programming
+#+LANGUAGE:    en
+#+OPTIONS:     H:3 num:nil toc:nil \n:nil ::t |:t ^:nil -:nil f:t *:t <:t
+#+DESCRIPTION: Pragmatic Monads
+
+Let's learn about monads as programmers, that is let's use them for
+building something and in the process we'll build up a intuition;
+practice first, then we can come back to theory.
+
+As Bryan O'Sullivan said once "...we need something that's non-trivial
+but still chewey." So we'll build a real working example in OCaml that
+will be the starting point of a library to the [[https://stripe.com/docs/api][Stripe API]] and it will
+use monads.
+
+* Prereqs
+We need to make sure we have all the same starting point for this
+code, I assume you have [[https://opam.ocaml.org][opam]] installed. Now do:
+#+BEGIN_SRC shell
+$ opam installl lwt cohttp.lwt yojson
+#+END_SRC
+These are the libaries we will use: ~lwt~ is for threading, ~cohttp.lwt~
+is for our HTTP requests and ~yojson~ is an easy to use json library.
+
+* Stripe
+The Stripe API is a straight forward REST API. You'll need to have a
+developer account from which you'll get your Test Key, hence forth
+known as ~key~. We'll focus on one task, we'll start the process of
+charging a credit card. Point your browser to this [[https://stripe.com/docs/api#create_charge][link]] which shows
+how to create the "Charge" object. From there we see we need to do a
+~POST~ to https://api.stripe.com/v1/charges with several required
+arguments:
+
+1) The amount to charge
+2) The ISO code for currency
+3) Either the Customer or Source (perfect use-case for a variant,
+   we'll use polymorphic variants)
+
+All of Stripe's API returns JSON, so we can already sketch out our
+function's signature and helper data structure, something like:
+#+BEGIN_SRC ocaml
+type t = { authed_headers: Cohttp.Headers.t; end_point : string; }
+val make_handle : unit -> t
+val create_charge : int -> string -> t -> Yojson.Basic.json Lwt.t
+#+END_SRC
+Mostly straight forward, although that ~Lwt.t~ should look at
+little strange. The quick answer that that ~create_charge~ will give
+back an ~Lwt.t~ Monad which in this case will contain a ~json~ object.
+
+Let's start filling out the ~make_handle~ function, 
+#+BEGIN_SRC ocaml
+let make_handle () = 
+  let auth_me k = 
+    let starter = Cohttp.Header.init () in 
+    Cohttp.Auth.credential_of_string ("Bearer " ^ k)
+    |> Cohttp.Header.add_authorization starter
+  in
+  {authed_headers = auth_me "YOUR STRIPE KEY"; 
+   (** Hardcoding to the charge create path *)
+   end_point = "https://api.stripe.com/v1/charges"}
+#+END_SRC
+This creates our record needed for making a post. Stripe requires a
+key in each request, so we just make this record to encapsulate that
+other wise boilerplate code we'd have to do instead.
+
