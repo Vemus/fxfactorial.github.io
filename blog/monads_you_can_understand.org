@@ -77,13 +77,15 @@ let make_handle () =
    end_point = "https://api.stripe.com/v1/charges"}
 #+END_SRC
 This creates our record needed for making a post. Stripe requires a
-key in each request, so we just make this record to encapsulate that
-other wise boilerplate code we'd have to do instead. Now the first cut
-of out ~create_charge~ function: 
+key in each request so we'll make this record to encapsulate that,
+otherwise we have to write boilerplate code, never fun.
+
+Now the first cut of out ~create_charge~ function:
 
 (*META NOTE* This is horrible indentation, I'm only doing it because
 of the sizing done in the exporting of this document and I want it to
-be clear what's happening)
+be clear what's happening and the coloring is wrong because ~'~ can be
+used in a value's name but its messing up the coding exporter)
 #+BEGIN_SRC ocaml -n
 let create_charge amount currency source handle = 
   let open Cohttp_lwt_unix in
@@ -98,7 +100,7 @@ let create_charge amount currency source handle =
      Yojson.Basic.from_string
 #+END_SRC
 Okay, so what the hell is going on. Line 2 open the ~Cohttp_lwt_unix~
-module locally to this function so that we can type Client.post
+module locally to this function so that we can type ~Client.post~
 instead of ~Cohttp_lwt_unix.Client.post~. Line 3 creates a ~uri~
 object, lines 4-6 are the query parameters we want to add to our ~uri~
 object. The ~|>~ symbol is a function, you can call it reverse apply,
@@ -106,7 +108,20 @@ you can define it as
 #+BEGIN_SRC ocaml 
 let ( |> ) f x = x f
 #+END_SRC
-
+but you don't need to, it comes with OCaml. It just says take the left
+side as the input to the right side, aka a Unix Pipe. Now let's see
+the signature of ~Client.post~, its:
+#+BEGIN_SRC ocaml
+val post ?ctx:Cohttp_lwt_unix.Client.ctx ->
+         ?body:Cohttp_lwt_body.t ->
+         ?chunked:bool ->
+         ?headers:Cohttp.Header.t ->
+         Uri.t -> 
+         (Cohttp.Response.t * Cohttp_lwt_body.t) Lwt.t
+#+END_SRC
+Looks big but we don't care about most of it, in fact we could just
+care about the ~Uri.t~ parameter since the rest of the parameters, the
+ones with ~?~, have default values.
 
 * Moral of the Story
 So in terms of actually day to day coding, you don't actually need to
