@@ -84,7 +84,7 @@ Now the first cut of out ~create_charge~ function:
 
 (*META NOTE* This is horrible indentation, I'm only doing it because
 of the sizing done in the exporting of this document and I want it to
-be clear what's happening and the coloring is wrong because ~ ' ~ can be
+be clear what's happening and the coloring is wrong because ~'~ can be
 used in a value's name but its messing up the coding exporter)
 #+BEGIN_SRC ocaml -n
 let create_charge amount currency source handle = 
@@ -129,7 +129,7 @@ value of a call to ~Client.post~, its:
 #+END_SRC
 This says that ~post~ will give back an ~Lwt.t~ monad which contains a
 tuple of a response object and the body, again completely reasonable.
-The line of line 8 features the famous ~ >>= ~ operator, aka ~bind~
+The line of line 8 features the famous ~>>=~ operator, aka ~bind~
 
 * Moral of the Story
 So in terms of actually day to day coding, you don't actually need to
