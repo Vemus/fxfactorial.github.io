@@ -31,7 +31,7 @@ These are the libaries we will use: ~lwt~ is for threading,
 ~cohttp.lwt~ is for our HTTP requests, ~uri~ for handling URIs and
 ~yojson~, an easy to use and *de facto* json library.
 
-* Stripe
+* TODO Stripe
 The Stripe API is a straight forward REST API. You'll need to have a
 developer account from which you'll get your Test Key, hence forth
 known as ~key~. We'll focus on one task, we'll start the process of
@@ -96,8 +96,8 @@ let create_charge amount currency source handle =
   |> Uri.add_query_params' this_uri
   |> Client.post ~headers:handle.authed >>= 
      fun (resp, body) -> 
-     Cohttp_lwt_body.to_string body >|= 
-     Yojson.Basic.from_string
+     Cohttp_lwt_body.to_string body >>= fun j -> 
+     Yojson.Basic.from_string j |> return
 #+END_SRC
 Okay, so what the hell is going on. Line 2 open the ~Cohttp_lwt_unix~
 module locally to this function so that we can type ~Client.post~
@@ -129,7 +129,33 @@ value of a call to ~Client.post~, its:
 #+END_SRC
 This says that ~post~ will give back an ~Lwt.t~ monad which contains a
 tuple of a response object and the body, again completely reasonable.
-The line of line 8 features the famous ~>>=~ operator, aka ~bind~
+The line of line 8 features the famous ~>>=~ operator, aka ~bind~ it's
+signature is:
+#+BEGIN_SRC ocaml
+val ( >>= ) : 'a Lwt.t -> ('a -> 'b Lwt.t) -> 'b Lwt.t
+#+END_SRC
+And this says that ~>>=~ takes something wrapped in the ~Lwt.t~ monad
+on the left side and passes the unwrapped value to a function on the
+right side which has to return something wrapped in the ~Lwt.t~ monad
+where the two somethings can be different or the same. So in our code
+that right side is this anonymous function, this lambda:
+#+BEGIN_SRC ocaml
+fun (resp, body) -> 
+#+END_SRC
+Now we have a handle on the http response and the body, we won't do
+any error checking so let's just look at the body with line 10's usage
+of ~Cohttp_lwt_body.to_string~ whose signature is:
+#+BEGIN_SRC ocaml
+val to_string : Cohttp_lwt_body.t -> string Lwt.t
+#+END_SRC
+Translation: Takes a body and gives back a string wrapped in a Lwt.t
+monad. Remember our goal is to get the body as a json object, so we
+could just pipe it to ~Yojson.Basic.from_string~ but still recall that
+our ~create_charge~ function had final value of ~Yojson.Basic.json
+Lwt.t~, not a plain ~Yojson.Basic.json~ so we pipe it to the other
+famous monad related function, ~return~
+
+
 
 * Moral of the Story
 So in terms of actually day to day coding, you don't actually need to
