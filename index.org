@@ -14,3 +14,7 @@ These are all up on github and licensed with BSD-3.
    from a given IP address. Pretty stable.
 2) OCaml bindings library for [[https://www.libssh.org/][libssh]], provides implementation of the
    ssh protocol. This is not stable, I need to work on it.
+3) ~Objective-C/C/OCaml~ powered native Cocoa application for ~OS X~,
+   its a GUI for ssh sessions, uses libssh, its called [[https://github.com/fxfactorial/tallgeese][Tallgeese]]
+4) A [[https://github.com/fxfactorial/podge][Hodgepodge]] of functions for OCaml, really a prototyping library,
+   ideal for hackathons.
