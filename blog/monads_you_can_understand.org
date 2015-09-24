@@ -13,6 +13,9 @@ Let's learn about monads as programmers, that is let's use them for
 building something and in the process we'll build up a intuition;
 practice first, then we can come back to theory.
 
+(I'll be writing to an OCaml audience mainly, but the Monad idea
+should be understandable anyway)
+
 As Bryan O'Sullivan said once "...we need something that's non-trivial
 but still chewey." So we'll build a real working example in OCaml that
 will be the starting point of a library to the [[https://stripe.com/docs/api][Stripe API]] and it will
@@ -47,7 +50,9 @@ function's signature and helper data structure, something like:
 #+BEGIN_SRC ocaml
 type t = { authed_headers: Cohttp.Headers.t; 
            end_point : string; }
+
 val make_handle : unit -> t
+
 val create_charge : int -> 
                     string -> 
                     string ->
