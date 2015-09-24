@@ -22,10 +22,11 @@ use monads.
 We need to make sure we have all the same starting point for this
 code, I assume you have [[https://opam.ocaml.org][opam]] installed. Now do:
 #+BEGIN_SRC shell
-$ opam installl lwt cohttp.lwt yojson
+$ opam install lwt cohttp.lwt yojson uri
 #+END_SRC
-These are the libaries we will use: ~lwt~ is for threading, ~cohttp.lwt~
-is for our HTTP requests and ~yojson~ is an easy to use json library.
+These are the libaries we will use: ~lwt~ is for threading,
+~cohttp.lwt~ is for our HTTP requests, ~uri~ for handling URIs and
+~yojson~, an easy to use and *de facto* json library.
 
 * Stripe
 The Stripe API is a straight forward REST API. You'll need to have a
@@ -44,9 +45,14 @@ arguments:
 All of Stripe's API returns JSON, so we can already sketch out our
 function's signature and helper data structure, something like:
 #+BEGIN_SRC ocaml
-type t = { authed_headers: Cohttp.Headers.t; end_point : string; }
+type t = { authed_headers: Cohttp.Headers.t; 
+           end_point : string; }
 val make_handle : unit -> t
-val create_charge : int -> string -> t -> Yojson.Basic.json Lwt.t
+val create_charge : int -> 
+                    string -> 
+                    string ->
+                    t ->  
+                    Yojson.Basic.json Lwt.t
 #+END_SRC
 Mostly straight forward, although that ~Lwt.t~ should look at
 little strange. The quick answer that that ~create_charge~ will give
@@ -66,5 +72,14 @@ let make_handle () =
 #+END_SRC
 This creates our record needed for making a post. Stripe requires a
 key in each request, so we just make this record to encapsulate that
-other wise boilerplate code we'd have to do instead.
+other wise boilerplate code we'd have to do instead. Now the
+~create_charge~ function:
+#+BEGIN_SRC ocaml
+let create_charge amount currency source handle = 
+  let this_uri = Uri.of_string handle.end_point in
+  [("amount", string_of_int amount);
+   ("currency", currency);]
+
+
+#+END_SRC
 
