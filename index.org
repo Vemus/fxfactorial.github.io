@@ -12,9 +12,12 @@ York City.
 These are all up on github and licensed with BSD-3.
 1) OCaml bindings library for [[https://www.maxmind.com/en/home][geoip2]], provides geolocation information
    from a given IP address. Pretty stable.
-2) OCaml bindings library for [[https://www.libssh.org/][libssh]], provides implementation of the
+2) OCaml bindings library and a command line tool to use the new
+   Google compression algorithm/library called Brotli. I wrote it in C,
+   C++, OCaml.
+3) OCaml bindings library for [[https://www.libssh.org/][libssh]], provides implementation of the
    ssh protocol. This is not stable, I need to work on it.
-3) ~Objective-C/C/OCaml~ powered native Cocoa application for ~OS X~,
+4) ~Objective-C/C/OCaml~ powered native Cocoa application for ~OS X~,
    its a GUI for ssh sessions, uses libssh, its called [[https://github.com/fxfactorial/tallgeese][Tallgeese]]
-4) A [[https://github.com/fxfactorial/podge][Hodgepodge]] of functions for OCaml, really a prototyping library,
+5) A [[https://github.com/fxfactorial/podge][Hodgepodge]] of functions for OCaml, really a prototyping library,
    ideal for hackathons.
