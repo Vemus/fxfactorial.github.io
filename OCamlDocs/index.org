@@ -1,9 +1,7 @@
 #+AUTHOR:   Edgar Aroutiounian
 #+EMAIL:    edgar.factorial@gmail.com
-
 #+LANGUAGE: en
 #+STARTUP: indent
-#+TITLE:    Generated OCaml Documentation
 #+OPTIONS:  toc:nil num:0
 
 Test code
