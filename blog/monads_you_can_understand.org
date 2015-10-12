@@ -29,7 +29,7 @@ to the [[https://stripe.com/docs/api][Stripe API]] and it will use monads.
 We need to make sure we have all the same starting point for this
 code, I assume you have [[https://opam.ocaml.org][opam]] installed. Now do:
 #+BEGIN_SRC shell
-$ opam install lwt.unix cohttp.lwt yojson uri
+$ opam install lwt cohttp yojson uri
 #+END_SRC
 These are the libaries we will use: ~lwt~ is for threading,
 ~cohttp.lwt~ is for our HTTP requests, ~uri~ for handling URIs and
