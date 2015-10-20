@@ -201,9 +201,13 @@ let () =
 Similar to 1, this reads all lines of file and gives it to you as a
 list of strings.
 
-These are two simple code samples from ~Podge~, check out the modules
-for other useful functions, especially ~Podge.String~ which is all due
-to [[http://rgrinberg.com][Rudi Grinberg]]. 
+These are two simple code samples from ~Podge~, check out the [[https://github.com/fxfactorial/podge][repo]]
+for other useful modules like: (The README has code examples)
+
+1) ~Web~ for simple HTTP requests and getting data back as JSON, 
+2) ~Xml~ for querying simple XML documents
+3) ~ANSITerminal~ for creating colored shell output
+4) ~String~ which is all due to [[http://rgrinberg.com][Rudi Grinberg]].
 
 * What can you do with it?
 Loads.
