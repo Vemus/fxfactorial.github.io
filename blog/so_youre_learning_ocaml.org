@@ -17,28 +17,44 @@ more programmers that are now aware of this amazing language called
 
 * Crash course on the OCaml ecosystem.
 These are some key notes that you should know.
+
 1) ~opam~ is the package manager for OCaml. It is very advanced and
    supports many features. The most basic of which is 
+
    #+BEGIN_SRC shell
    $ opam install <some_package>
    #+END_SRC
+
    For people on ~OS X~, you can get it on ~brew~ and all the ~Linux~
    distros should have ~opam~ for you to install. For Windows people,
    get a VM.
+
 2) Once you have ~opam~ installed, you probably want to do:
+
    #+BEGIN_SRC shell
    $ opam switch 4.02.3
    #+END_SRC
+
    This will install the latest version of the compiler.
+
 3) ~ocamlfind~ is a program that predates ~opam~ and wraps the
    standard ~OCaml~ compilers: ~ocamlc~ and ~ocamlopt~. The former is
    a byte code compiler and the latter creates native code.
+
 4) ~ocamlbuild~ is a tool that helps build ~OCaml~ programs, many
    people have strong opinions on it.
+
 5) ~oasis~ is a tool that helps abstract usage of 3, 4. I resisted it
-   for a while and wrote ~Makefile~s instead, don't do that, just ~oasis~
+   for a while and wrote ~Makefile~s instead, don't do that, just use
+   ~oasis~
+
 6) ~merlin~ is a OCaml program that is simply amazing it drives code
    completion for plugins available in ~emacs~ and ~vim~.
+
+7) There are no full blown IDEs for OCaml, learn ~emacs~ or ~vim~.
+
+8) ~utop~ is an enhanced repl, its better than the plain ~ocaml~
+   repl. Install it with ~opam install utop~
 
 * Library situation
 ~OCaml~ does have a standard library but it sucks. It was only created
@@ -50,3 +66,48 @@ moon. There are a few standard library replacements, one is called
 is called ~Batteries~, this is more "community" supported. There is a
 more recent contender called ~Containers~.
 
+* Doing simple tasks (shameless plug)
+I try using ~OCaml~ for literally everything and that includes going
+to hackathons, to make this less painful I wrote a library called
+~Podge~ which helps with simple stuff. I don't claim its a standard
+library replacement, just a library for getting stuff done. These two
+code samples assume the file is named ~code.ml~ and can be run with
+~utop code.ml~
+
+First install with opam:
+
+#+BEGIN_SRC shell
+$ opam install podge
+#+END_SRC
+
+1) Reading output of a process
+
+#+BEGIN_SRC ocaml
+#require "podge"
+let () = 
+  Podge.Unix.read_process_output "ls -halt" |> List.iter print_endline
+#+END_SRC
+
+The ~|>~ just means piping, its piping the output of
+~read_process_output~ into the input of the partially applied function
+~iter~
+
+2) Reading a file
+#+BEGIN_SRC ocaml
+#require "podge"
+let () = 
+  Podge.Unix.read_process_output "code.ml" |> List.iter print_endline
+#+END_SRC
+
+Similar to 1, this reads all lines of file and gives it to you as a
+list of strings.
+
+These are two simple code samples from ~Podge~, check out the modules
+for other useful functions, especially ~Podge.String~ which is all due
+to [[http://rgrinberg.com][Rudi Grinberg]]. 
+
+* Stick with it!
+This style of coding might be new to you or maybe its your first
+programming language, stick with it and continue. ~OCaml~ offers many
+awesome features and has many strengths including a very professional
+and pragmatic community.
