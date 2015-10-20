@@ -10,7 +10,7 @@
 #+DESCRIPTION: Help for OCaml beginners
 
 Today was the first day of the Introduction to Functional Programming
-in ~OCaml~ course, locate [[https://www.france-universite-numerique-mooc.fr/courses/parisdiderot/56002/session01/about][here]]. Apparently over 2,000 people signed up
+in ~OCaml~ course, located [[https://www.france-universite-numerique-mooc.fr/courses/parisdiderot/56002/session01/about][here]]. Apparently over 2,000 people signed up
 and while doubtlessly many will drop out, there will still be 2,000
 more programmers that are now aware of this amazing language called
 ~OCaml~.
