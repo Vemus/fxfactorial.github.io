@@ -27,7 +27,10 @@ These are some key notes that you should know.
 
    For people on ~OS X~, you can get it on ~brew~ and all the ~Linux~
    distros should have ~opam~ for you to install. For Windows people,
-   get a VM.
+   get a VM. EDIT: To be clear, OCaml can build native executables on
+   Windows just fine, but opam doesn't work on this platform and for a
+   beginner you'll waste a lot of time with environment issues or
+   libraries that assume Unix.
 
 2) Once you have ~opam~ installed, you probably want to do:
 
