@@ -46,10 +46,78 @@ These are some key notes that you should know.
 
 5) ~oasis~ is a tool that helps abstract usage of 3, 4. I resisted it
    for a while and wrote Makefiles instead, don't do that, just use
-   oasis
+   oasis. The oasis flow basically goes like this: (Be aware that
+   oasis is really finicky and its error messages are useless)
+
+   1) Create a directory. 
+   2) Go to the directory and create a file named *_oasis* and
+      directory named ~src~
+   3) Here is a template of the contents of the *_oasis* file
+
+      #+BEGIN_SRC shell
+      OASISFormat:  0.4
+      OCamlVersion: >= 4.02.3
+      Name:         opam_package_name
+      Version:      0.1
+      Maintainers:  New OCaml programmer
+      Homepage:     http://my_coolsite.com
+      Synopsis:     Some short description
+      Authors:      Cool@me.com
+      License:      BSD-3-clause
+      Plugins:      META (0.4), DevFiles (0.4)
+      AlphaFeatures: ocamlbuild_more_args
+  
+      Description:
+        Some cool description
+  
+      # This is a comment and this below creates an binary program    
+      Executable <some_program_name>
+      Path: src
+      BuildTools:ocamlbuild
+      install: true
+      MainIs: main.ml
+      CompiledObject: native
+      BuildDepends: package_one, package_two
+      
+      # Another comment, this builds a library called pg
+      Library pg
+      Path:         src
+      # oasis will figure out the dependencies, 
+      # Just list the modules you want public, 
+      # Note that there's no .ml, just give the name
+      Modules:      Pg
+      CompiledObject: byte
+      BuildDepends: some_package
+
+      #+END_SRC
+    4) type: ~oasis setup -setup-update dynamic~
+    5) type: ~make~. 
+    6) You can stop here, but you can go even further with
+       ~oasis2opam~. Install it with: ~opam install oasis2opam~, then
+       in your project's root directory, aka the directory with the
+       _oasis file, do: ~oasis2opam --local~. This creates the ~opam~
+       directory and some meta data for the opam packaging
+       system. Your local package can now be a first class citizen
+       with opam just by doing this in the same project root
+       directory: 
+       #+BEGIN_SRC shell
+       $ opam pin add <your_package_name> . -y
+       #+END_SRC
 
 6) ~merlin~ is a OCaml program that is simply amazing it drives code
-   completion for plugins available in ~emacs~ and ~vim~.
+   completion for plugins available in ~emacs~ and ~vim~. Once you
+   have merlin installing and running, add a ~.merlin~ file to your
+   project so that ~merlin~ knows what packages to code complete for,
+   a sample ~.merlin~ file looks like this:
+
+   #+BEGIN_SRC shell
+   B _build/src
+   S src
+   PKG cmdliner js_of_ocaml
+   #+END_SRC
+   
+   Notice how I put the ~B _build/src~ That sort of assumes you're
+   using ~_oasis~ and you made the ~src~ directory I mentioned earlier.
 
 7) There are no full blown IDEs for OCaml, learn ~emacs~ or ~vim~.
 
