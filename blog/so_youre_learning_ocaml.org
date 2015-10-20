@@ -136,7 +136,10 @@ These are some key notes that you should know.
    Notice how I put the ~B _build/src~ That sort of assumes you're
    using ~_oasis~ and you made the ~src~ directory I mentioned earlier.
 
-7) There are no full blown IDEs for OCaml, learn ~emacs~ or ~vim~.
+7) There are no full blown IDEs for OCaml, learn ~emacs~ or
+   ~vim~. EDIT: apparently ~Sublime Text~ has a merlin plugin, if
+   you're already familiar with Sublime Text then just stick with it,
+   merlin is really what matters here.
 
 8) ~utop~ is an enhanced repl, its better than the plain ~ocaml~
    repl. Install it with ~opam install utop~
