@@ -45,8 +45,8 @@ These are some key notes that you should know.
    people have strong opinions on it.
 
 5) ~oasis~ is a tool that helps abstract usage of 3, 4. I resisted it
-   for a while and wrote ~Makefile~s instead, don't do that, just use
-   ~oasis~
+   for a while and wrote Makefiles instead, don't do that, just use
+   oasis
 
 6) ~merlin~ is a OCaml program that is simply amazing it drives code
    completion for plugins available in ~emacs~ and ~vim~.
