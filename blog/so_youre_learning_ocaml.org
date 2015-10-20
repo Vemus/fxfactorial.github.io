@@ -49,9 +49,11 @@ These are some key notes that you should know.
    oasis. The oasis flow basically goes like this: (Be aware that
    oasis is really finicky and its error messages are useless)
 
-   5.1) Create a directory. 
+   5.1) Create a directory.
+
    5.2) Go to the directory and create a file named *_oasis* and
         directory named ~src~
+
    5.3) Here is a template of the contents of the *_oasis* file
 
         #+BEGIN_SRC shell
@@ -91,7 +93,9 @@ These are some key notes that you should know.
 
         #+END_SRC
     5.4) type ~oasis setup -setup-update dynamic~
+
     5.5) type ~make~
+
     5.6) You can stop here, but you can go even further with
          ~oasis2opam~. Install it with: ~opam install oasis2opam~, then
          in your project's root directory, aka the directory with the
