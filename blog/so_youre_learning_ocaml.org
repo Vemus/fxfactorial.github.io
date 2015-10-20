@@ -146,7 +146,9 @@ moon. There are a few standard library replacements, one is called
 ~Core~ and its provided by Jane Street. Its the library used in the
 *Real World OCaml* book/website. Another standard library replacement
 is called ~Batteries~, this is more "community" supported. There is a
-more recent contender called ~Containers~.
+more recent contender called ~Containers~. For a categorized list of
+contemporary and well liked go to/must have libraries checkout the
+[[https://github.com/rizo/awesome-ocaml][awesome-ocaml]] repository.
 
 * Doing simple tasks (shameless plug)
 I try using ~OCaml~ for literally everything and that includes going
