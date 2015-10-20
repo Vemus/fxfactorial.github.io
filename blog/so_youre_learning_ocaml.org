@@ -1,0 +1,52 @@
+#+TITLE:       So you're learning OCaml...
+#+AUTHOR:      Edgar Aroutiounian
+#+EMAIL:       edgar.factorial@gmail.com
+#+DATE:        2015-10-19 Mon
+#+URI:         /blog/%y/%m/%d/so-you're-learning-ocaml
+#+KEYWORDS:    OCaml, code
+#+TAGS:        OCaml, code
+#+LANGUAGE:    en
+#+OPTIONS:     H:3 num:nil toc:nil \n:nil ::t |:t ^:nil -:nil f:t *:t <:t
+#+DESCRIPTION: Help for OCaml beginners
+
+Today was the first day of the Introduction to Functional Programming
+in ~OCaml~ course, locate [[https://www.france-universite-numerique-mooc.fr/courses/parisdiderot/56002/session01/about][here]]. Apparently over 2,000 people signed up
+and while doubtlessly many will drop out, there will still be 2,000
+more programmers that are now aware of this amazing language called
+~OCaml~.
+
+* Crash course on the OCaml ecosystem.
+These are some key notes that you should know.
+1) ~opam~ is the package manager for OCaml. It is very advanced and
+   supports many features. The most basic of which is 
+   #+BEGIN_SRC shell
+   $ opam install <some_package>
+   #+END_SRC
+   For people on ~OS X~, you can get it on ~brew~ and all the ~Linux~
+   distros should have ~opam~ for you to install. For Windows people,
+   get a VM.
+2) Once you have ~opam~ installed, you probably want to do:
+   #+BEGIN_SRC shell
+   $ opam switch 4.02.3
+   #+END_SRC
+   This will install the latest version of the compiler.
+3) ~ocamlfind~ is a program that predates ~opam~ and wraps the
+   standard ~OCaml~ compilers: ~ocamlc~ and ~ocamlopt~. The former is
+   a byte code compiler and the latter creates native code.
+4) ~ocamlbuild~ is a tool that helps build ~OCaml~ programs, many
+   people have strong opinions on it.
+5) ~oasis~ is a tool that helps abstract usage of 3, 4. I resisted it
+   for a while and wrote ~Makefile~s instead, don't do that, just ~oasis~
+6) ~merlin~ is a OCaml program that is simply amazing it drives code
+   completion for plugins available in ~emacs~ and ~vim~.
+
+* Library situation
+~OCaml~ does have a standard library but it sucks. It was only created
+to serve the needs of the compiler programmers, ie its not like
+~Python~'s standard library which has everything under the sun + the
+moon. There are a few standard library replacements, one is called
+~Core~ and its provided by Jane Street. Its the library used in the
+*Real World OCaml* book/website. Another standard library replacement
+is called ~Batteries~, this is more "community" supported. There is a
+more recent contender called ~Containers~.
+
