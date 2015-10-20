@@ -106,6 +106,24 @@ These are two simple code samples from ~Podge~, check out the modules
 for other useful functions, especially ~Podge.String~ which is all due
 to [[http://rgrinberg.com][Rudi Grinberg]]. 
 
+* What can you do with it?
+Loads.
+
+1) Compilers!, lots of compilers/compiler tools are written in
+   OCaml: Facebook uses OCaml for pfff and Flow and the first cut of
+   Rust was written in OCaml.
+2) Financial world, Jane Street uses OCaml for basically everything (AFAIK)
+3) Systems Programming: Ahrefs, my employer, uses OCaml for heavy
+   systems programming.
+4) Kernels: Unikernels are hot right now, the most prominent one is
+   the Mirage-OS project and its all OCaml.
+5) Shameless plug: I use OCaml as well for ~js_of_ocaml~, in fact I'm
+   using it to write an Electron app with a node backend.
+6) Genomics/Bioinformatics: Hammer Labs in NYC uses OCaml for their
+   genomics/sequencing work.
+
+...And I'm sure there's more I haven't mentioned...
+
 * Stick with it!
 This style of coding might be new to you or maybe its your first
 programming language, stick with it and continue. ~OCaml~ offers many
