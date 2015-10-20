@@ -92,9 +92,18 @@ These are some key notes that you should know.
           BuildDepends: some_package
 
         #+END_SRC
-    5.4) type ~oasis setup -setup-update dynamic~
 
-    5.5) type ~make~
+    5.4) Generate the Makefile, setup.ml, configure and other build crap.
+
+         #+BEGIN_SRC shell
+         $ oasis setup -setup-update dynamic
+         #+END_SRC
+
+    5.5) Actually build your code, yes its just a call to make.
+
+         #+BEGIN_SRC shell
+         $ make
+         #+END_SRC
 
     5.6) You can stop here, but you can go even further with
          ~oasis2opam~. Install it with: ~opam install oasis2opam~, then
@@ -104,13 +113,14 @@ These are some key notes that you should know.
          system. Your local package can now be a first class citizen
          with opam just by doing this in the same project root
          directory: 
+
          #+BEGIN_SRC shell
          $ opam pin add <your_package_name> . -y
          #+END_SRC
 
 6) ~merlin~ is a OCaml program that is simply amazing it drives code
    completion for plugins available in ~emacs~ and ~vim~. Once you
-   have merlin installing and running, add a ~.merlin~ file to your
+   have merlin installed and running, add a ~.merlin~ file to your
    project so that ~merlin~ knows what packages to code complete for,
    a sample ~.merlin~ file looks like this:
 
