@@ -213,17 +213,17 @@ for other useful modules like: (The README has code examples)
 Loads.
 
 1) Compilers!, lots of compilers/compiler tools are written in
-   OCaml: Facebook uses OCaml for pfff and Flow and the first cut of
+   OCaml: Facebook uses OCaml for [[https://github.com/facebook/pfff][pfff]] and [[https://github.com/facebook/flow][flow]] and the first cut of
    Rust was written in OCaml.
-2) Financial world, Jane Street uses OCaml for basically everything (AFAIK)
-3) Systems Programming: Ahrefs, my employer, uses OCaml for heavy
+2) Financial world, [[https://www.janestreet.com][Jane Street]] uses OCaml for basically everything (AFAIK)
+3) Systems Programming: [[https://ahrefs.com][ahrefs]], my employer, uses OCaml for heavy
    systems programming.
 4) Kernels: Unikernels are hot right now, the most prominent one is
-   the Mirage-OS project and its all OCaml.
+   the [[https://mirage.io][Mirage-OS]] project and its all OCaml.
 5) Shameless plug: I use OCaml as well for ~js_of_ocaml~, in fact I'm
    using it to write an Electron app with a node backend (All code is
-   OCaml compiled into JS, then run on node/Electron).
-6) Genomics/Bioinformatics: Hammer Labs in NYC uses OCaml for their
+   OCaml compiled into JS, then run on node/Electron), see [[https://github.com/fxfactorial/ocaml-electron][here.]]
+6) Genomics/Bioinformatics: [[https://github.com/hammerlab][Hammer Lab]] in NYC uses OCaml for their
    genomics/sequencing work.
 
 ...And I'm sure there's more I haven't mentioned...
