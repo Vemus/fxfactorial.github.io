@@ -112,7 +112,7 @@ Another project in this vein are my bindings to Github's ~Electron~
 project, here's a project I did with a friend using Basecamp's
 recently released ~Trix~ editor.
 
-[[../static/img/electron_working.gif]]
+[[./electron_working.gif]]
 
 * Like what you see?
 Writing out these bindings is a bit of work, Node's API is pretty big
