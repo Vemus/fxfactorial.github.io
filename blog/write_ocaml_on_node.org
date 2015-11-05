@@ -1,0 +1,123 @@
+#+TITLE:       Let's write compile OCaml to JavaScript, run on Node
+#+AUTHOR:      Edgar Aroutiounian
+#+EMAIL:       edgar.factorial@gmail.com
+#+DATE:        2015-11-05 Thu
+#+URI:         /blog/%y/%m/%d/write-ocaml,-run-on-nodejs
+#+KEYWORDS:    nodejs, javascript, OCaml
+#+TAGS:        nodejs, JavaScript, OCaml
+#+LANGUAGE:    en
+#+OPTIONS:     H:3 num:nil toc:nil \n:nil ::t |:t ^:nil -:nil f:t *:t <:t
+#+DESCRIPTION: OCaml on Node
+
+I've been exposed to Node, its an amazing ecosystem with great cross
+platform support and a great standard library; my only issue is
+*JavaScript*. So I've been writing several libraries, bindings, that
+compile OCaml to JavaScript which I then run on ~node~.
+
+* Sample Code
+Here's an example, with explanations, of some bindings.
+
+#+BEGIN_SRC ocaml -n
+(* Assume this file is called c.ml *)
+open Nodejs
+
+class child_process = object
+
+  val raw_js = require_module "child_process"
+
+  (* Clearly not finished *)
+  method spawn_sync cmd args : (string * string) list =
+    let handle =
+      [|i (Js.string cmd);
+        i (List.map Js.string args |> Array.of_list |> Js.array)|]
+      |> m raw_js "spawnSync"
+    in
+    (handle <!> "envPairs")
+    |> Js.to_array |> Array.map begin fun (s : Js.js_string Js.t) ->
+      let chop = s##split (Js.string "=") |> to_string_list |> Array.of_list in
+      (chop.(0), chop.(1))
+    end
+    |> Array.to_list
+
+end
+
+let () =
+  let ls_proc = (new child_process)#spawn_sync "ls" [] in
+  ls_proc |> List.iter begin fun (key, value) ->
+    Printf.sprintf "Key was: %s and value: %s" key value
+    |> print_endline
+  end
+#+END_SRC
+
+(Line one comes from my ~nodejs~ package, install it with ~opam install
+nodejs~). 
+
+This example is a subset of my bindings to the builtin node module,
+[[https://nodejs.org/api/child_process.html][child_process]]. Here we spawn a separate process and create an OCaml
+~alist~ out of the environment variables of the spawned process. A
+point of interest is the poverty of OCaml StdLib's ~String~ module, so
+much so that I get more functionality out of JavaScript's string
+methods! (There's no split in the StdLib). 
+
+To actually run this code you'll need to do:
+
+#+BEGIN_SRC shell
+$ ocamlfind ocamlc c.ml -linkpkg -package nodejs -o T.out
+$ js_of_ocaml T.out
+$ node T.js
+#+END_SRC
+
+* Projects
+This approach surprisingly works and I've written similar bindings to
+[[https://github.com/fxfactorial/ocaml-npm-socket-io][socket.io]] for which I have a working chat server:
+
+#+BEGIN_SRC ocaml
+open Nodejs
+
+let () =
+  let io = Socket_io.require () in
+  let server =
+    Http.create_server begin fun incoming response ->
+
+      Fs.read_file ~path:"./client.html" begin fun err data ->
+        response#write_head ~status_code:200 [("Content-type", "text/html")];
+        response#end_ ~data:(Http.String data) ()
+
+      end
+    end
+  in
+  let app = server#listen ~port:8080 begin fun () ->
+      Printf.sprintf
+        "Started Server and Running node: %s" (new process#version)
+      |> print_endline
+    end
+  in
+
+  let io = io#listen app in
+  io#sockets#on_connection begin fun socket ->
+
+    socket#on "message_to_server" begin fun data ->
+
+      io#sockets#emit
+        ~event_name:"message_to_client"
+        !!(object%js val message = data <!> "message" end)
+
+    end
+  end
+#+END_SRC
+Notice the features of OCaml that don't exist in JavaScript at all,
+like named parameters.
+
+Another project in this vein are my bindings to Github's ~Electron~
+project, here's a project I did with a friend using Basecamp's
+recently released ~Trix~ editor.
+
+//INSERT IMAGE
+
+* Like what you see?
+Writing out these bindings is a bit of work, Node's API is pretty big
+in addition to third party code like socket.io, express, and
+Electron. Much of these bindings are quite formulaic, although some
+things don't easily match up between the OCaml and JavaScript
+boundary, like ~varargs~. 
+
