@@ -123,4 +123,7 @@ like ~varargs~ so that requires some more thought at times.
 
 To any reader interested in OCaml open-source or for whatever reason,
 send me a PR, its mostly an issue of translating [[https://nodejs.org/api/index.html][the Node API]] into the
-equivalent bindings.
+equivalent bindings:
+
+[[https://github.com/fxfactorial/ocaml-nodejs][nodejs repo]]
+[[https://github.com/fxfactorial/ocaml-electron][electron repo]]
