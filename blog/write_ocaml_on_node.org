@@ -1,4 +1,4 @@
-#+TITLE:       Let's write compile OCaml to JavaScript, run on Node
+#+TITLE:       Compile OCaml to JavaScript, run on Node
 #+AUTHOR:      Edgar Aroutiounian
 #+EMAIL:       edgar.factorial@gmail.com
 #+DATE:        2015-11-05 Thu
