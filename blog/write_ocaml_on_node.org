@@ -112,12 +112,15 @@ Another project in this vein are my bindings to Github's ~Electron~
 project, here's a project I did with a friend using Basecamp's
 recently released ~Trix~ editor.
 
-//INSERT IMAGE
+[[./static/img/electron_working.gif]]
 
 * Like what you see?
 Writing out these bindings is a bit of work, Node's API is pretty big
 in addition to third party code like socket.io, express, and
 Electron. Much of these bindings are quite formulaic, although some
-things don't easily match up between the OCaml and JavaScript
-boundary, like ~varargs~. 
+ideas don't easily match up between the OCaml and JavaScript boundary,
+like ~varargs~ so that requires some more thought at times. 
 
+To any reader interested in OCaml open-source or for whatever reason,
+send me a PR, its mostly an issue of translating [[https://nodejs.org/api/index.html][the Node API]] into the
+equivalent bindings.
