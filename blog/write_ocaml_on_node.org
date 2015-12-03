@@ -15,7 +15,129 @@ platform support and a great standard library; my only issue is
 compile OCaml to JavaScript which I then run on ~node~.
 
 * Sample Code
-Here's an example, with explanations, of some bindings.
+Here are some working examples, many are directly from the README at
+[[https://github.com/fxfactorial/ocaml-nodejs/blob/master/README.md][ocaml-nodejs]].
+
+*Multicast DNS over UDP sockets, only for the local network, like a
+ no config p2p chat application.*
+#+BEGIN_SRC ocaml -n
+open Nodejs
+
+module U = Yojson.Basic.Util
+
+let (multicast_addr, bind_addr, port) = "224.1.1.1", "0.0.0.0", 6811
+
+let () =
+  Random.self_init ();
+  let p = new process in
+  let user_name = ref (Printf.sprintf "User:%d" (Random.int 10000)) in
+  let listener = Udp_datagram.(create_socket ~reuse_address:true Udp4) in
+  let sender = Udp_datagram.(create_socket ~reuse_address:true Udp4) in
+
+  listener#bind ~port ~address:multicast_addr ~f:begin fun () ->
+    listener#add_membership multicast_addr;
+    listener#set_broadcast true;
+    listener#set_multicast_loopback true
+  end ();
+
+
+  listener#on_message begin fun b resp ->
+
+    let handle = b#to_string () |> json_of_string in
+    if (handle <!> "id" |> Js.to_string) <> !user_name
+    then print_string (handle <!> "message" |> Js.to_string)
+
+  end;
+
+  p#stdin#on_data begin function
+    | String _ -> ()
+    | Buffer b ->
+      let msg = b#to_string () in
+      (* This needs to be redone with Re_pcre *)
+      if String.length msg > 10 then begin
+        let modify = String.sub msg 0 9 in
+        if modify = "set name:"
+        then begin
+          let as_string = Js.string (String.trim msg) in
+          let chopped =
+            as_string##split (Js.string ":") |> to_string_list |> Array.of_list
+          in
+          user_name := chopped.(1)
+        end
+      end;
+
+      let msg = Printf.sprintf "%s>>>%s" !user_name (b#to_string ()) in
+      let total_message = (object%js
+        val id = !user_name |> to_js_str
+        val message = msg |> to_js_str
+        end) |> stringify
+      in
+      sender#send
+        ~offset:0
+        ~length:(String.length total_message)
+        ~port
+        ~dest_address:multicast_addr
+        (String total_message)
+    end
+#+END_SRC
+
+*Create a site and render directly from jade templates*
+#+BEGIN_SRC ocaml
+open Nodejs
+
+let () =
+  let exp = new Express.express in
+  let app = new Express.app ~existing:None in
+
+  app#set_app_value (`View_engine "jade");
+  app#use (exp#static ".");
+  app#get ~path:"/" (fun _ res -> res#render "index.jade");
+
+  app#listen ~port:8080
+#+END_SRC
+
+*Create a raw server from the Net module*
+#+BEGIN_SRC ocaml
+let () =
+  let server = Net.create_server ~conn_listener:begin fun sock ->
+      sock#on_end (fun () -> print_endline "client disconnected");
+      sock#write "Hello\r\n";
+      sock >|> sock |> ignore
+    end ()
+  in
+  server#listen ~port:8124 begin fun () ->
+    let info = server#address in
+    print_endline info.Net.address;
+    print_endline (info.Net.ip_family |> string_of_ip);
+    print_endline (info.Net.port |> string_of_int);
+    print_endline "started server"
+  end
+#+END_SRC
+
+*Create a file stream, gzip it, write it*
+#+BEGIN_SRC ocaml -n
+open Nodejs
+
+let _ =
+  Fs.create_read_stream "code.ml" >|>
+  Zlib.create_gzip () >|>
+  Fs.create_write_stream "NEWCODE_TEST.ml"
+#+END_SRC
+
+
+*Typed Decoding of Buffers*
+#+BEGIN_SRC ocaml
+open Nodejs
+
+let () =
+  let string_decoder = new String_decoder.decoder Utf_8 in
+  let cent = new Buffer.buffer (`Array [|0xE2; 0x82; 0xAC|]) in
+  (string_decoder#write cent) |> print_endline
+#+END_SRC
+
+
+This one is a bit more low level as it its a general idea of how these
+bindings are implemented.
 
 #+BEGIN_SRC ocaml -n
 (* Assume this file is called c.ml *)
