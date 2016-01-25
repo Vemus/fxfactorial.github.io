@@ -1,4 +1,4 @@
-#+TITLE:       See your HTTP traffic like a pro
+#+TITLE:       See your HTTP traffic like an Infosec pro
 #+AUTHOR:      Edgar Aroutiounian
 #+EMAIL:       edgar.factorial@gmail.com
 #+DATE:        2016-01-24 Sun
@@ -13,14 +13,15 @@ Often times we want to see our network traffic in an organized way,
 one tool we can use is ~tcpdump~ but its a pretty low level tool and
 often times HTTP is all we actually care about. 
 
-* mitmproxy
+* mitmproxy (man in the middle proxy)
 I've been using ~mitmproxy~, its an incredible Python tool that is
 designed for HTTP and I especially love the command line ncurses
-interface. You can install it with ~pip~ but I just settle for the
-version that is present on the package manager. With ~mitmproxy~ we'll
-see all the HTTP traffic in a clean and organized way; ~mitmproxy~ is
-MUCH nicer than using squid and the icky configurations that come
-along with squid.
+interface. Its designed for man in the middle attacks but you can also
+use it as a debugging tool. Its installable with ~pip~ but I just
+settle for the version that is present on the package manager. With
+~mitmproxy~ we'll see all the HTTP traffic in a clean and organized
+way; ~mitmproxy~ is MUCH nicer than using squid and the icky
+configurations that come along with squid.
 
 * Example
 This example was tested and works on Ubuntu 14.04 and also worked on
